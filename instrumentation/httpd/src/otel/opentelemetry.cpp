@@ -92,7 +92,7 @@ void initTracer()
   opentelemetry::sdk::resource::ResourceAttributes resAttrs;
 
   // set the default service name
-  resAttrs["service.name"] = "apache-httpd";
+  resAttrs["service.name"] = kResourceDefaultServiceName;
 
   for(auto &it:config.resources)
   {
