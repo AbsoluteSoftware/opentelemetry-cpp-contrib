@@ -29,6 +29,8 @@
 namespace httpd_otel
 {
 
+const nostd::string_view kResourceDefaultServiceName = "apache-httpd";
+
 // TODO: use semantic conventions  https://github.com/open-telemetry/opentelemetry-cpp/issues/566
 const nostd::string_view kAttrHTTPServerName         = "http.server_name";
 const nostd::string_view kAttrHTTPMethod             = "http.method";
@@ -88,6 +90,10 @@ void initTracer()
 
   // add custom-configured resources
   opentelemetry::sdk::resource::ResourceAttributes resAttrs;
+
+  // set the default service name
+  resAttrs["service.name"] = "apache-httpd";
+
   for(auto &it:config.resources)
   {
     resAttrs[it.first] = it.second;
